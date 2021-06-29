@@ -6,6 +6,9 @@ const morgan = require('morgan')
 require('dotenv').config();
 
 //import routes
+const items = require('./routes/items')
+const users = require('./routes/users')
+const auth = require('./routes/auth')
 
 //initalize express
 const app = express()
@@ -26,6 +29,9 @@ mongoose.connect(process.env.MONGO_URL, {
 }).then(console.log("Connected to MongoDB")).catch((err)=>{console.log(err)})
 
 //initalize routes
+app.use("/api/items", items);
+app.use("/api/users", users);
+app.use("/api/auth", auth);
 
 //app listening
 app.listen(PORT, ()=>{console.log(`Server running at ${PORT}`)})
